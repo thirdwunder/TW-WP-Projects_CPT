@@ -19,6 +19,8 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
 // Load plugin class files
 require_once( 'includes/class-tw-projects-plugin.php' );
 require_once( 'includes/class-tw-projects-plugin-settings.php' );
@@ -54,6 +56,9 @@ $prefix = 'tw_';
 $projects_category = get_option('wpt_tw_project_category') ? get_option('wpt_tw_project_category') : "off";
 $projects_tag      = get_option('wpt_tw_project_tag') ? get_option('wpt_tw_project_tag') : "off";
 
+$project_testimonials = get_option('wpt_tw_project_testimonials') ? get_option('wpt_tw_project_testimonials') : "off";
+$project_client       = get_option('wpt_tw_project_client') ? get_option('wpt_tw_project_client') : "off";
+
 TW_Projects_Plugin()->register_post_type(
                         'tw_project',
                         __( 'Projects',     'tw-projects-plugin' ),
@@ -61,6 +66,7 @@ TW_Projects_Plugin()->register_post_type(
                         __( 'Projects CPT', 'tw-projects-plugin'),
                         array(
                           'menu_icon'=>plugins_url( 'assets/img/cpt-icon-project.png', __FILE__ ),
+                          'rewrite' => array('slug' => 'project'),
                         )
                     );
 
@@ -70,4 +76,32 @@ if($projects_category=='on'){
 
 if($projects_tag=='on'){
  TW_Projects_Plugin()->register_taxonomy( 'tw_project_tag', __( 'Project Tags', 'tw-projects-plugin' ), __( 'Project Tag', 'tw-projects-plugin' ), 'tw_project', array('hierarchical'=>false) );
+}
+
+
+if (is_admin()){
+  $project_config = array(
+    'id'             => 'tw_project_cpt_metabox',
+    'title'          => 'Project Details',
+    'pages'          => array('tw_project'),
+    'context'        => 'normal',
+    'priority'       => 'high',
+    'fields'         => array(),
+    'local_images'   => true,
+    'use_with_theme' => false
+  );
+  $project_meta =  new AT_Meta_Box($project_config);
+
+  $project_meta->addText($prefix.'project_url',array('name'=> 'Project URL', 'desc'=>'Project Website URL. External links must include http://'));
+
+  if(is_plugin_active('tw-clients-plugin/tw-clients-plugin.php') && $project_client=='on'){
+    $project_meta->addPosts($prefix.'project_client',array('post_type' => 'tw_client'),array('name'=> 'Client'));
+  }
+
+  if( is_plugin_active( 'tw-testimonials-plugin/tw-testimonials-plugin.php' ) && $project_testimonials=='on' ){
+    $project_meta->addPosts($prefix.'project_testimonials',array('post_type' => 'tw_testimonial', 'type'=>'checkbox_list'),array('name'=> 'Testimonials'));
+  }
+
+  $project_meta->Finish();
+
 }

@@ -125,109 +125,52 @@ class TW_Projects_Plugin_Settings {
 					'type'			=> 'checkbox',
 					'default'		=> ''
 				),
-				//array(
-				//	'id' 			=> 'text_field',
-				//	'label'			=> __( 'Some Text' , 'tw-projects-plugin' ),
-				//	'description'	=> __( 'This is a standard text field.', 'tw-projects-plugin' ),
-				//	'type'			=> 'text',
-				//	'default'		=> '',
-				//	'placeholder'	=> __( 'Placeholder text', 'tw-projects-plugin' )
-				//),
-				//array(
-				//	'id' 			=> 'password_field',
-				//	'label'			=> __( 'A Password' , 'tw-projects-plugin' ),
-				//	'description'	=> __( 'This is a standard password field.', 'tw-projects-plugin' ),
-				//	'type'			=> 'password',
-				//	'default'		=> '',
-				//	'placeholder'	=> __( 'Placeholder text', 'tw-projects-plugin' )
-				//),
-				//array(
-				//	'id' 			=> 'secret_text_field',
-				//	'label'			=> __( 'Some Secret Text' , 'tw-projects-plugin' ),
-				//	'description'	=> __( 'This is a secret text field - any data saved here will not be displayed after the page has reloaded, but it will be saved.', 'tw-projects-plugin' ),
-				//	'type'			=> 'text_secret',
-				//	'default'		=> '',
-				//	'placeholder'	=> __( 'Placeholder text', 'tw-projects-plugin' )
-				//),
-				//array(
-				//	'id' 			=> 'text_block',
-				//	'label'			=> __( 'A Text Block' , 'tw-projects-plugin' ),
-				//	'description'	=> __( 'This is a standard text area.', 'tw-projects-plugin' ),
-				//	'type'			=> 'textarea',
-				//	'default'		=> '',
-				//	'placeholder'	=> __( 'Placeholder text for this textarea', 'tw-projects-plugin' )
-				//),
-				//array(
-				//	'id' 			=> 'single_checkbox',
-				//	'label'			=> __( 'An Option', 'tw-projects-plugin' ),
-				//	'description'	=> __( 'A standard checkbox - if you save this option as checked then it will store the option as \'on\', otherwise it will be an empty string.', 'tw-projects-plugin' ),
-				//	'type'			=> 'checkbox',
-				//	'default'		=> ''
-				//),
-				//array(
-				//	'id' 			=> 'select_box',
-				//	'label'			=> __( 'A Select Box', 'tw-projects-plugin' ),
-				//	'description'	=> __( 'A standard select box.', 'tw-projects-plugin' ),
-				//	'type'			=> 'select',
-				//	'options'		=> array( 'drupal' => 'Drupal', 'joomla' => 'Joomla', 'wordpress' => 'WordPress' ),
-				//	'default'		=> 'wordpress'
-				//),
-				//array(
-				//	'id' 			=> 'radio_buttons',
-				//	'label'			=> __( 'Some Options', 'tw-projects-plugin' ),
-				//	'description'	=> __( 'A standard set of radio buttons.', 'tw-projects-plugin' ),
-				//	'type'			=> 'radio',
-				//	'options'		=> array( 'superman' => 'Superman', 'batman' => 'Batman', 'ironman' => 'Iron Man' ),
-				//	'default'		=> 'batman'
-				//),
-				//array(
-				//	'id' 			=> 'multiple_checkboxes',
-				//	'label'			=> __( 'Some Items', 'tw-projects-plugin' ),
-				//	'description'	=> __( 'You can select multiple items and they will be stored as an array.', 'tw-projects-plugin' ),
-				//	'type'			=> 'checkbox_multi',
-				//	'options'		=> array( 'square' => 'Square', 'circle' => 'Circle', 'rectangle' => 'Rectangle', 'triangle' => 'Triangle' ),
-				//	'default'		=> array( 'circle', 'triangle' )
-				//)
 			)
 		);
 
-//		$settings['extra'] = array(
-//			'title'					=> __( 'Extra', 'tw-projects-plugin' ),
-//			'description'			=> __( 'These are some extra input fields that maybe aren\'t as common as the others.', 'tw-projects-plugin' ),
-//			'fields'				=> array(
-//				array(
-//					'id' 			=> 'number_field',
-//					'label'			=> __( 'A Number' , 'tw-projects-plugin' ),
-//					'description'	=> __( 'This is a standard number field - if this field contains anything other than numbers then the form will not be submitted.', 'tw-projects-plugin' ),
-//					'type'			=> 'number',
-//					'default'		=> '',
-//					'placeholder'	=> __( '42', 'tw-projects-plugin' )
-//				),
-//				array(
-//					'id' 			=> 'colour_picker',
-//					'label'			=> __( 'Pick a colour', 'tw-projects-plugin' ),
-//					'description'	=> __( 'This uses WordPress\' built-in colour picker - the option is stored as the colour\'s hex code.', 'tw-projects-plugin' ),
-//					'type'			=> 'color',
-//					'default'		=> '#21759B'
-//				),
-//				array(
-//					'id' 			=> 'an_image',
-//					'label'			=> __( 'An Image' , 'tw-projects-plugin' ),
-//					'description'	=> __( 'This will upload an image to your media library and store the attachment ID in the option field. Once you have uploaded an imge the thumbnail will display above these buttons.', 'tw-projects-plugin' ),
-//					'type'			=> 'image',
-//					'default'		=> '',
-//					'placeholder'	=> ''
-//				),
-//				array(
-//					'id' 			=> 'multi_select_box',
-//					'label'			=> __( 'A Multi-Select Box', 'tw-projects-plugin' ),
-//					'description'	=> __( 'A standard multi-select box - the saved data is stored as an array.', 'tw-projects-plugin' ),
-//					'type'			=> 'select_multi',
-//					'options'		=> array( 'linux' => 'Linux', 'mac' => 'Mac', 'windows' => 'Windows' ),
-//					'default'		=> array( 'linux' )
-//				)
-//			)
-//		);
+    $relationships = 0;
+    $client = false;
+    $testimonials = false;
+    if( is_plugin_active( 'tw-testimonials-plugin/tw-testimonials-plugin.php' ) ){
+      $relationships++;
+      $testimonials = true;
+    }
+
+    if( is_plugin_active( 'tw-clients-plugin/tw-clients-plugin.php' ) ){
+      $relationships++;
+      $client = true;
+    }
+
+    if($relationships>0){
+
+      $settings['relationships'] = array(
+  			'title'					=> __( 'Relationships', 'tw-projects-plugin' ),
+  			'description'			=> __( 'Relationship options for other Third Wunder plugins', 'tw-projects-plugin' ),
+  			'fields'				=> array()
+  		);
+
+      if($client){
+        $settings['relationships']['fields'][] = array(
+					'id' 			=> 'tw_project_client',
+					'label'			=> __( 'Enable Client', 'tw-projects-plugin' ),
+					'description'	=> __( 'Enable Project Client', 'tw-projects-plugin' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				);
+  		}
+
+  		if($testimonials){
+        $settings['relationships']['fields'][] = array(
+					'id' 			=> 'tw_project_testimonials',
+					'label'			=> __( 'Enable Testimonials', 'tw-projects-plugin' ),
+					'description'	=> __( 'Enable Project Testimonials', 'tw-projects-plugin' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				);
+  		}
+
+    }
+
 
 		$settings = apply_filters( $this->parent->_token . '_settings_fields', $settings );
 
