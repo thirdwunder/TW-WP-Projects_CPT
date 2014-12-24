@@ -113,14 +113,14 @@ class TW_Projects_Plugin_Settings {
 			'fields'				=> array(
   			array(
 					'id' 			=> 'tw_project_category',
-					'label'			=> __( 'Enable Categories', 'tw-projects-plugin' ),
+					'label'			=> __( 'Categories', 'tw-projects-plugin' ),
 					'description'	=> __( 'Enable Project categories', 'tw-projects-plugin' ),
 					'type'			=> 'checkbox',
 					'default'		=> ''
 				),
 				array(
 					'id' 			=> 'tw_project_tag',
-					'label'			=> __( 'Enable Tags', 'tw-projects-plugin' ),
+					'label'			=> __( 'Tags', 'tw-projects-plugin' ),
 					'description'	=> __( 'Enable Project tags', 'tw-projects-plugin' ),
 					'type'			=> 'checkbox',
 					'default'		=> ''
@@ -152,7 +152,7 @@ class TW_Projects_Plugin_Settings {
       if($client){
         $settings['relationships']['fields'][] = array(
 					'id' 			=> 'tw_project_client',
-					'label'			=> __( 'Enable Client', 'tw-projects-plugin' ),
+					'label'			=> __( 'Client', 'tw-projects-plugin' ),
 					'description'	=> __( 'Enable Project Client', 'tw-projects-plugin' ),
 					'type'			=> 'checkbox',
 					'default'		=> ''
@@ -162,7 +162,7 @@ class TW_Projects_Plugin_Settings {
   		if($testimonials){
         $settings['relationships']['fields'][] = array(
 					'id' 			=> 'tw_project_testimonials',
-					'label'			=> __( 'Enable Testimonials', 'tw-projects-plugin' ),
+					'label'			=> __( 'Testimonials', 'tw-projects-plugin' ),
 					'description'	=> __( 'Enable Project Testimonials', 'tw-projects-plugin' ),
 					'type'			=> 'checkbox',
 					'default'		=> ''
@@ -170,6 +170,35 @@ class TW_Projects_Plugin_Settings {
   		}
 
     }
+
+    $settings['advanced'] = array(
+			'title'					=> __( 'Advanced', 'tw-projects-plugin' ),
+			'description'			=> __( 'Third Wunder Project plugin advanced settings.', 'tw-projects-plugin' ),
+			'fields'				=> array(
+				array(
+					'id' 			=> 'tw_project_slug',
+					'label'			=> __( 'Slug', 'tw-projects-plugin' ),
+					'description'	=> __( 'Projects custom post type slug', 'tw-projects-plugin' ),
+					'type'			=> 'text',
+					'default'		=> 'project',
+					'placeholder' => 'project',
+				),
+				array(
+					'id' 			=> 'tw_project_search',
+					'label'			=> __( 'Exclude from Search', 'tw-projects-plugin' ),
+					'description'	=> __( 'Hide Projects items from search results', 'tw-projects-plugin' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+				array(
+					'id' 			=> 'tw_project_archive',
+					'label'			=> __( 'Has Archive', 'tw-projects-plugin' ),
+					'description'	=> __( 'Enable an archive page for Projects custom post type', 'tw-projects-plugin' ),
+					'type'			=> 'checkbox',
+					'default'		=> 'on'
+				),
+			)
+		);
 
 
 		$settings = apply_filters( $this->parent->_token . '_settings_fields', $settings );
