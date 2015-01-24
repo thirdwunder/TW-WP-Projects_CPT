@@ -53,15 +53,15 @@ function TW_Projects_Plugin () {
 TW_Projects_Plugin();
 $prefix = 'tw_';
 
-$project_slug = get_option('wpt_tw_project_slug') ? get_option('wpt_tw_project_slug') : "faq";
+$project_slug = get_option('wpt_tw_project_slug') ? get_option('wpt_tw_project_slug') : "project";
 $project_search = get_option('wpt_tw_project_search') ? true : false;
 $project_archive = get_option('wpt_tw_project_archive') ? true : false;
 
-$project_category = get_option('wpt_tw_project_category') ? get_option('wpt_tw_project_category') : "off";
-$project_tag      = get_option('wpt_tw_project_tag') ? get_option('wpt_tw_project_tag') : "off";
+$project_category = (get_option('wpt_tw_project_category')=='on') ? true : false;
+$project_tag      = (get_option('wpt_tw_project_tag')=='on') ? true : false;
 
-$project_testimonials = get_option('wpt_tw_project_testimonials') ? get_option('wpt_tw_project_testimonials') : "off";
-$project_client       = get_option('wpt_tw_project_client') ? get_option('wpt_tw_project_client') : "off";
+$project_testimonials = (get_option('wpt_tw_project_testimonials')=='on') ? true : false;
+$project_client       = (get_option('wpt_tw_project_client')=='on') ? true : false;
 
 TW_Projects_Plugin()->register_post_type(
                         'tw_project',
@@ -100,11 +100,11 @@ if (is_admin()){
 
   $project_meta->addText('tw_project_url',array('name'=> 'Project URL', 'desc'=>'Project Website URL. External links must include http://'));
 
-  if(is_plugin_active('tw-clients-plugin/tw-clients-plugin.php') && $project_client=='on'){
+  if(is_plugin_active('tw-clients-plugin/tw-clients-plugin.php') && $project_client){
     $project_meta->addPosts('tw_project_client',array('post_type' => 'tw_client'),array('name'=> 'Client'));
   }
 
-  if( is_plugin_active( 'tw-testimonials-plugin/tw-testimonials-plugin.php' ) && $project_testimonials=='on' ){
+  if( is_plugin_active( 'tw-testimonials-plugin/tw-testimonials-plugin.php' ) && $project_testimonials ){
     $project_meta->addPosts('tw_project_testimonials',array('post_type' => 'tw_testimonial', 'type'=>'checkbox_list'),array('name'=> 'Testimonials'));
   }
 
